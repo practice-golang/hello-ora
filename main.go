@@ -3,7 +3,6 @@ package main // import "hello-ora"
 import (
 	"context"
 	"database/sql/driver"
-	"io"
 	"log"
 	"os"
 
@@ -37,7 +36,6 @@ func main() {
 
 	rows, err := stmt.Query(nil)
 	die("Can't create query:", err)
-
 	defer rows.Close()
 
 	values := make([]driver.Value, 1)
@@ -45,13 +43,9 @@ func main() {
 	for {
 		err = rows.Next(values)
 		if err != nil {
-			break
+			die("Can't fetch row:", err)
 		}
 
 		log.Println(values[0])
-	}
-
-	if err != nil && err != io.EOF {
-		die("Can't fetch row:", err)
 	}
 }
