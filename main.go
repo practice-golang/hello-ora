@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	go_ora "github.com/sijms/go-ora"
+	go_ora "github.com/sijms/go-ora/v2"
 )
 
 func die(msg string, err error) {
